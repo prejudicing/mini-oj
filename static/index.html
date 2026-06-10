@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini OJ</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span>Mini OJ</span>
+      </div>
+      <div class="toolbar">
+        <select id="languageSelect" aria-label="语言">
+          <option>Python 3</option>
+        </select>
+        <button id="resetBtn" class="secondary-btn" type="button">重置</button>
+        <button id="runBtn" class="primary-btn run-btn" type="button">
+          <span aria-hidden="true">▷</span>
+          运行
+        </button>
+        <button id="submitBtn" class="primary-btn" type="button">
+          <span aria-hidden="true">↗</span>
+          提交
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <h2>题目列表</h2>
+        <div id="problemList" class="problem-list"></div>
+      </aside>
+
+      <section class="problem-pane" aria-live="polite">
+        <div class="problem-heading">
+          <div>
+            <p id="problemIndex" class="problem-index"></p>
+            <h1 id="problemTitle"></h1>
+          </div>
+          <span id="difficulty" class="difficulty"></span>
+        </div>
+
+        <p id="description" class="description"></p>
+
+        <section class="io-section">
+          <h2>输入格式</h2>
+          <p id="inputDescription"></p>
+        </section>
+
+        <section class="io-section">
+          <h2>输出格式</h2>
+          <p id="outputDescription"></p>
+        </section>
+
+        <section>
+          <h2>示例</h2>
+          <div id="examples" class="examples"></div>
+        </section>
+
+        <section>
+          <h2>提示</h2>
+          <ul id="hints" class="hints"></ul>
+        </section>
+      </section>
+
+      <section class="judge-pane">
+        <div class="editor-header">
+          <h2>代码编辑器</h2>
+          <span id="savingState">Python 3</span>
+        </div>
+        <textarea
+          id="codeEditor"
+          spellcheck="false"
+          autocomplete="off"
+          autocapitalize="off"
+        ></textarea>
+
+        <section class="result-panel">
+          <div class="result-heading">
+            <h2>运行结果</h2>
+            <span id="statusBadge" class="status idle">未运行</span>
+          </div>
+          <dl class="result-grid">
+            <dt>状态</dt>
+            <dd id="resultStatus">未运行</dd>
+            <dt>返回值</dt>
+            <dd><pre id="stdout">-</pre></dd>
+            <dt>错误</dt>
+            <dd><pre id="stderr">-</pre></dd>
+            <dt>执行时间</dt>
+            <dd id="executeTime">-</dd>
+          </dl>
+        </section>
+
+        <section class="history-panel">
+          <div class="result-heading">
+            <h2>提交记录</h2>
+            <button id="refreshBtn" class="icon-btn" type="button" title="刷新">↻</button>
+          </div>
+          <div id="submissionList" class="submission-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
