@@ -50,10 +50,19 @@ export DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock
 
 `app/judge.py` 也会自动尝试读取 `XDG_RUNTIME_DIR/docker.sock` 作为 rootless Docker 的 fallback。
 
-2. 克隆项目。
+2. 获取项目代码。
+
+如果从 GitHub 获取：
 
 ```bash
 git clone https://github.com/prejudicing/mini-oj.git
+cd mini-oj
+```
+
+如果从压缩包获取：
+
+```bash
+unzip mini-oj.zip
 cd mini-oj
 ```
 
@@ -196,6 +205,40 @@ JSON
 {"status":"AC"}
 ```
 
+## 页面验收
+
+浏览器打开 `http://127.0.0.1:8000` 后，可以按下面步骤快速验收：
+
+1. 左侧题目列表中可以看到“两数之和”和“爬楼梯”。
+2. 点击题目后，中间题面和右侧代码模板会切换。
+3. 点击“运行”会触发 Docker 评测，但不会新增提交记录。
+4. 点击“提交”会触发 Docker 评测，并在提交记录中新增一条记录。
+5. 正确答案显示 `AC`，错误答案显示 `WA`，运行异常显示 `RE`，超时显示 `TLE`。
+
+两数之和示例答案：
+
+```python
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        table = {}
+        for i, num in enumerate(nums):
+            complement = target - num
+            if complement in table:
+                return [table[complement], i]
+            table[num] = i
+```
+
+爬楼梯示例答案：
+
+```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        a, b = 1, 1
+        for _ in range(n):
+            a, b = b, a + b
+        return a
+```
+
 ## 项目结构
 
 ```text
@@ -215,6 +258,33 @@ mini-oj/
 ├── environment.yml
 ├── requirements.txt
 └── README.md
+```
+
+## 打包说明
+
+提交压缩包时建议包含完整项目代码和 README，不要只提交 README。压缩包不需要包含 `.git`、Python 缓存、SQLite 运行数据库或本地虚拟环境。
+
+可以在项目上级目录执行：
+
+```bash
+zip -r mini-oj.zip mini-oj \
+  -x "mini-oj/.git/*" \
+  -x "mini-oj/__pycache__/*" \
+  -x "mini-oj/app/__pycache__/*" \
+  -x "mini-oj/data/*.db" \
+  -x "mini-oj/data/*.db-*" \
+  -x "mini-oj/.venv/*"
+```
+
+压缩包中应至少包含：
+
+```text
+README.md
+environment.yml
+requirements.txt
+app/
+static/
+data/.gitkeep
 ```
 
 ## 注意
